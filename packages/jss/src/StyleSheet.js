@@ -49,6 +49,7 @@ export default class StyleSheet {
     }
     this.rules = new RuleList(this.options)
 
+    // TODO: we need separate styles to atomic mode
     for (const name in styles) {
       this.rules.add(name, styles[name])
     }

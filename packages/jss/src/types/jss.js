@@ -165,7 +165,8 @@ export type JssOptions = {
   id?: CreateGenerateIdOptions,
   plugins?: Array<Plugin>,
   insertionPoint?: InsertionPoint,
-  Renderer?: Class<Renderer> | null
+  Renderer?: Class<Renderer> | null,
+  atomic: boolean | null
 }
 
 export type InternalJssOptions = {|
@@ -173,7 +174,8 @@ export type InternalJssOptions = {|
   plugins: Array<Plugin>,
   id: CreateGenerateIdOptions,
   insertionPoint?: InsertionPoint,
-  Renderer?: Class<Renderer> | null
+  Renderer?: Class<Renderer> | null,
+  atomic: boolean | null
 |}
 
 export type StyleSheetFactoryOptions = {|
@@ -196,7 +198,8 @@ export type StyleSheetOptions = {|
   classNamePrefix?: string,
   Renderer?: Class<Renderer> | null,
   insertionPoint?: InsertionPoint,
-  jss: Jss
+  jss: Jss,
+  atomic: boolean | null
 |}
 
 export type InternalStyleSheetOptions = {

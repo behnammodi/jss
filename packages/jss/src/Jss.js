@@ -32,7 +32,8 @@ export default class Jss {
     id: {minify: false},
     createGenerateId: createGenerateIdDefault,
     Renderer: isInBrowser ? DomRenderer : null,
-    plugins: []
+    plugins: [],
+    atomic: false
   }
 
   generateId: GenerateId = createGenerateIdDefault({minify: false})
@@ -70,6 +71,10 @@ export default class Jss {
       this.options.Renderer = options.Renderer
     }
 
+    if ('atomic' in options) {
+      this.options.atomic = options.atomic
+    }
+
     // eslint-disable-next-line prefer-spread
     if (options.plugins) this.use.apply(this, options.plugins)
 
@@ -84,12 +89,14 @@ export default class Jss {
     if (typeof index !== 'number') {
       index = sheets.index === 0 ? 0 : sheets.index + 1
     }
+
     const sheet = new StyleSheet(styles, {
       ...options,
       jss: this,
       generateId: options.generateId || this.generateId,
       insertionPoint: this.options.insertionPoint,
       Renderer: this.options.Renderer,
+      atomic: this.options.atomic,
       index
     })
     this.plugins.onProcessSheet(sheet)
