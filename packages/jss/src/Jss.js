@@ -84,7 +84,8 @@ export default class Jss {
     if (typeof index !== 'number') {
       index = sheets.index === 0 ? 0 : sheets.index + 1
     }
-    const sheet = new StyleSheet(styles, {
+
+    const sheet = new StyleSheet(this.plugins.onCreateStyles(styles), {
       ...options,
       jss: this,
       generateId: options.generateId || this.generateId,

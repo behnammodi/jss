@@ -171,6 +171,10 @@ export class StyleRule extends BaseStyleRule {
 
 export default {
   onCreateRule(name: string, style: JssStyle, options: RuleOptions): StyleRule | null {
+    if (typeof style ==='string') {
+      return null
+    }
+
     if (name[0] === '@' || (options.parent && options.parent.type === 'keyframes')) {
       return null
     }

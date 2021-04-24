@@ -18,6 +18,7 @@ import type {
 import type {StyleRule, BaseStyleRule} from './plugins/styleRule'
 
 type Registry = {
+  onCreateStyles: Array<onCreateStyles>,
   onCreateRule: Array<OnCreateRule>,
   onProcessRule: Array<OnProcessRule>,
   onProcessStyle: Array<OnProcessStyle>,
@@ -36,6 +37,16 @@ export default class PluginsRegistry {
   }
 
   registry: Registry
+
+  onCreateStyles(styles) {
+    //console.log('onCreateStyles 2',this.registry.onCreateStyles.length,styles)
+    let s = styles;
+    for (let i = 0; i < this.registry.onCreateStyles.length; i++) {
+      s = this.registry.onCreateStyles[i](s)
+    }
+
+    return s
+  }
 
   /**
    * Call `onCreateRule` hooks and return an object if returned by a hook.
@@ -128,6 +139,7 @@ export default class PluginsRegistry {
         return registry
       },
       {
+        onCreateStyles: [],
         onCreateRule: [],
         onProcessRule: [],
         onProcessStyle: [],

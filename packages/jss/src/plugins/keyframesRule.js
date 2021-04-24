@@ -114,7 +114,7 @@ const replaceRef = (style: JssStyle, prop: string, keyframes: KeyframesMap) => {
 
 const plugin: Plugin = {
   onCreateRule(key, frames, options) {
-    return typeof key === 'string' && keyRegExp.test(key)
+    return typeof key === 'string' && (keyRegExp.test(key) && key.substr(0,2) !== 'a-')
       ? new KeyframesRule(key, frames, options)
       : null
   },
